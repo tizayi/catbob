@@ -20,6 +20,19 @@ export default (client: Client) => {
   console.log(commands);
 
   client.on("messageCreate", (message: Message) => {
+    if (message.author.id == "183691593562193920") {
+      message.reply("Please laugh");
+      return;
+    }
+    if (message.author.id == "226677575122944001") {
+      message.reply("Urrrrm actually zoe is 4000 years old.");
+      return;
+    }
+    if (message.author.id == "762019533845692426") {
+      message.reply("Kirsty for the last time please stop");
+      return;
+    }
+
     if (message.author.bot || !message.content.startsWith("!")) {
       return;
     }

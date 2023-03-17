@@ -1,7 +1,7 @@
 import fs, { Dirent } from "fs";
 
 const getFiles = (dir: string, suffix: string): string[] => {
-  const files: Dirent[] = fs.readdirSync(dir, { withFileTypes: true});
+  const files: Dirent[] = fs.readdirSync(dir, { withFileTypes: true });
 
   let commandFiles: string[] = [];
 
@@ -12,9 +12,9 @@ const getFiles = (dir: string, suffix: string): string[] => {
         ...getFiles(`${dir}/${file.name}`, suffix),
       ];
     } else if (file.name.endsWith(suffix)) {
-        commandFiles.push(`${dir}/${file.name}`);
+      commandFiles.push(`${dir}/${file.name}`);
     }
-  } 
+  }
 
   return commandFiles;
 };

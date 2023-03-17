@@ -3,14 +3,16 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export default {callback: async (message: Message, ...args: string[]): Promise<void> => {
+export default {
+  callback: async (message: Message, ...args: string[]): Promise<void> => {
     const gamesArray: number[][] = await Promise.all(args.map(getOwnedGames));
     const result: number[] = gamesArray.reduce((a, b) =>
       a.filter((c) => b.includes(c))
     );
     const gameNames: string[] = await Promise.all(result.map(getGamename));
     message.reply(gameNames.join("\n"));
-}}
+  },
+};
 
 type steamGame = {
   appid: number;

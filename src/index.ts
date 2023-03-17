@@ -10,13 +10,12 @@ const client: Client = new Client({
   ],
 });
 
-client.on('ready', () => {
-  console.log(__dirname)
-  let handler = require('./command-handler')
-  if (handler.default) handler = handler.default
+client.on("ready", () => {
+  console.log(__dirname);
+  let handler = require("./command-handler");
+  if (handler.default) handler = handler.default;
 
-  handler(client)
-})
-
+  handler(client);
+});
 
 client.login(process.env.TOKEN);
