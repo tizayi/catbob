@@ -1,4 +1,4 @@
-name: Frontend Code CI
+name: catbob Code CI
 on:
   push:
   pull_request:
@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 60
     defaults:
       run:
-        working-directory: frontend
+        working-directory: src
 
     steps:
       - name: Checkout Source
@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: src/package-lock.json
 
       - name: Install
         run: npm ci
