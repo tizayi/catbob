@@ -14,7 +14,7 @@ export default {
   },
 };
 
-type steamGame = {
+interface steamGame {
   appid: number;
   playtime_forever: number;
   playtime_windows_forever: number;

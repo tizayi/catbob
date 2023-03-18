@@ -2,7 +2,7 @@ import { Message } from "discord.js";
 import axios, { Axios, AxiosResponse } from "axios";
 
 interface PickupLine {
-    pickup: string
+  pickup: string;
 }
 
 export default {
@@ -14,6 +14,8 @@ export default {
 };
 
 const getRizz = async (): Promise<string> => {
-  const response: AxiosResponse<PickupLine, any> = await axios.get("https://vinuxd.vercel.app/api/pickup");
+  const response: AxiosResponse<PickupLine, any> = await axios.get(
+    "https://vinuxd.vercel.app/api/pickup"
+  );
   return response.data.pickup;
 };

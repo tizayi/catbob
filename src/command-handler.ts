@@ -20,7 +20,10 @@ export default (client: Client) => {
   console.log(commands);
 
   client.on("messageCreate", (message: Message) => {
-    if (message.content.toLowerCase().includes("bad") && message.content.toLowerCase().includes("catbob")){
+    if (
+      message.content.toLowerCase().includes("bad") &&
+      message.content.toLowerCase().includes("catbob")
+    ) {
       message.reply("Sorry I will try and do better :(");
     }
 
