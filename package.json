@@ -1,7 +1,7 @@
 {
-  "name": "discord-bot",
+  "name": "catbob",
   "version": "1.0.0",
-  "description": "",
+  "description": "A discord bot to do discord things",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
