@@ -4,9 +4,9 @@ import { getApiData } from "../utils";
 export default {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
     console.log(args);
-    const data = await getApiData<{ pickup: string }>(
-      "https://vinuxd.vercel.app/api/pickup"
+    const data = await getApiData<{ compliment: string }>(
+      "https://complimentr.com/api"
     );
-    message.reply(`Hi ${args.join(",")} , ${data.pickup}`);
+    message.reply(`Hi ${args.join(",")} , ${data.compliment}`);
   },
 };
