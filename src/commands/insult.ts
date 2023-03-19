@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import { getApiData } from "../utils";
+import { Command, getApiData } from "../utils";
 
 interface InsultData {
   number: number;
@@ -12,7 +12,7 @@ interface InsultData {
   comment: string;
 }
 
-export default {
+const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
     console.log(args);
     const data = await getApiData<InsultData>(
@@ -20,4 +20,7 @@ export default {
     );
     message.reply(`Hi ${args.join(",")} , ${data.insult}`);
   },
+  description: "Catbob is in his jocker arc",
 };
+
+export default command;

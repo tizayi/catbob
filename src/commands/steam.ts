@@ -2,6 +2,8 @@ import { Message } from "discord.js";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import fs from "fs";
+import { CommaListExpression } from "typescript";
+import { Command } from "../utils";
 
 const USER_FILE_PATH = "./src/commands/steam-users/users.json";
 
@@ -47,7 +49,7 @@ const addUser = (newUser: SteamUser) => {
 
 const steamCompare = (users: SteamUser[]) => {};
 
-export default {
+const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
     console.log(readUserArray());
     const gamesArray: number[][] = await Promise.all(args.map(getOwnedGames));
@@ -57,7 +59,10 @@ export default {
     const gameNames: string[] = await Promise.all(result.map(getGamename));
     message.reply(gameNames.join("\n"));
   },
+  description: "Catbob can do steam things (WIP)",
 };
+
+export default command;
 
 async function getOwnedGames(userId: string): Promise<number[]> {
   const response = await axios.get(

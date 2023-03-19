@@ -1,13 +1,13 @@
-import { Message } from "discord.js";
 import axios from "axios";
+import { Message } from "discord.js";
 
-export interface CommandType {
-  [key: string]: any;
+export interface Command {
+  callback(message: Message, ...args: string[]): void;
+  description: string;
 }
 
-export interface BotCommand {
-  data: any;
-  execute: any;
+export interface CommandObject {
+  [key: string]: Command;
 }
 
 export const getApiData = async <ResponseData>(

@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
+import { Command } from "../utils";
 
-export default {
+const command: Command = {
   callback: (message: Message, ...args: string[]): void => {
     const fullString = args.join("");
     const basedValue = hashCode(fullString);
@@ -11,7 +12,10 @@ export default {
       message.reply("based");
     }
   },
+  description: "Catbob is equiped with the latest in basedometer technology",
 };
+
+export default command;
 
 const hashCode = (input: string): number => {
   return input.split("").reduce((a: number, b: string): number => {

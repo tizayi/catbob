@@ -9,4 +9,5 @@ export default {
     );
     message.reply(`Hi ${args.join(",")} , ${data.pickup}`);
   },
+  description: "Catbob has w rizz.",
 };
