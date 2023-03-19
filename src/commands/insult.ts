@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import { Command, getApiData } from "../utils";
 
-interface InsultData {
+export interface InsultData {
   number: number;
   language: string;
   insult: string;

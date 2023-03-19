@@ -1,9 +1,9 @@
-import { Message } from "discord.js";
+import { Message, ThreadAutoArchiveDuration } from "discord.js";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import fs from "fs";
-import { CommaListExpression } from "typescript";
-import { Command } from "../utils";
+import { Command, getApiData } from "../utils";
+import Insult, { InsultData } from "./insult";
 
 const USER_FILE_PATH = "./src/commands/steam-users/users.json";
 
@@ -47,11 +47,28 @@ const addUser = (newUser: SteamUser) => {
   }
 };
 
-const steamCompare = (users: SteamUser[]) => {};
+
+const isValidSteamId = (steamId: string): boolean => {
+  if(steamId.length !== 17 || parseInt(steamId)){
+    return false;
+  }
+  return true
+}
 
 const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
-    console.log(readUserArray());
+    for(let string in args){
+    if(!isValidSteamId(string)){
+      Insult.callback(message)
+      message.reply("Not a valid Id");
+      const data = await getApiData<InsultData>(
+        "https://evilinsult.com/generate_insult.php?lang=en&type=json"
+      );
+      message.channel.send(data.insult)
+      continue
+    }
+  }
+    
     const gamesArray: number[][] = await Promise.all(args.map(getOwnedGames));
     const result: number[] = gamesArray.reduce((a, b) =>
       a.filter((c) => b.includes(c))
@@ -64,7 +81,7 @@ const command: Command = {
 
 export default command;
 
-async function getOwnedGames(userId: string): Promise<number[]> {
+const getOwnedGames = async (userId: string): Promise<number[]> => {
   const response = await axios.get(
     `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_KEY}&steamid=${userId}&format=json`
   );
@@ -74,9 +91,16 @@ async function getOwnedGames(userId: string): Promise<number[]> {
   return gamesList;
 }
 
-async function getGamename(gameId: number): Promise<string> {
+const getGamename = async (gameId: number): Promise<string> => {
   const response = await axios.get(
     `http://store.steampowered.com/api/appdetails?appids=${gameId}`
   );
-  return response.data[gameId.toString()].data.name;
+  let result = "Bad game";
+  try{
+    result = response.data[gameId.toString()].data.name
+  } catch (error){
+    console.log(gameId)
+    console.log(response.data[gameId.toString()].data)
+  }
+  return result
 }

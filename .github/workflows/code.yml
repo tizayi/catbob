@@ -10,7 +10,7 @@ jobs:
         os: ["ubuntu-latest"]
         node-version: [16.x]
 
-    name: build/${{ matrix.node-version }}/${{ matrix.os }}
+    name: test/${{ matrix.node-version }}/${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     defaults:
