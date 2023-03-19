@@ -10,25 +10,11 @@ jobs:
         os: ["ubuntu-latest"]
         node-version: [16.x]
 
-    name: build/${{ matrix.node-version }}/${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 60
-    defaults:
-      run:
-        working-directory: .
-
     steps:
       - name: Checkout Source
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: package-lock.json
 
       - name: Install
         run: npm ci
@@ -37,4 +23,4 @@ jobs:
         run: npm test
 
       - name: Prettier
-        run: npx prettier --check './src/'
+        run: npx prettier --check './src/' './tests'
