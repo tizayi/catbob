@@ -16,28 +16,27 @@ interface steamGame {
   rtime_last_played: number;
 }
 
-
 const isValidSteamId = (steamId: string): boolean => {
-  if(steamId.length !== 17 || parseInt(steamId)){
+  if (steamId.length !== 17 || parseInt(steamId)) {
     return false;
   }
-  return true
-}
+  return true;
+};
 
 const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
-    for(let string in args){
-    if(!isValidSteamId(string)){
-      Insult.callback(message)
-      message.reply("Not a valid Id");
-      const data = await getApiData<InsultData>(
-        "https://evilinsult.com/generate_insult.php?lang=en&type=json"
-      );
-      message.channel.send(data.insult)
-      continue
+    for (let string in args) {
+      if (!isValidSteamId(string)) {
+        Insult.callback(message);
+        message.reply("Not a valid Id");
+        const data = await getApiData<InsultData>(
+          "https://evilinsult.com/generate_insult.php?lang=en&type=json"
+        );
+        message.channel.send(data.insult);
+        continue;
+      }
     }
-  }
-    
+
     const gamesArray: number[][] = await Promise.all(args.map(getOwnedGames));
     const result: number[] = gamesArray.reduce((a, b) =>
       a.filter((c) => b.includes(c))
@@ -58,18 +57,18 @@ const getOwnedGames = async (userId: string): Promise<number[]> => {
     (game: steamGame) => game.appid
   );
   return gamesList;
-}
+};
 
 const getGamename = async (gameId: number): Promise<string> => {
   const response = await axios.get(
     `http://store.steampowered.com/api/appdetails?appids=${gameId}`
   );
   let result = "Bad game";
-  try{
-    result = response.data[gameId.toString()].data.name
-  } catch (error){
-    console.log(gameId)
-    console.log(response.data[gameId.toString()].data)
+  try {
+    result = response.data[gameId.toString()].data.name;
+  } catch (error) {
+    console.log(gameId);
+    console.log(response.data[gameId.toString()].data);
   }
-  return result
-}
+  return result;
+};

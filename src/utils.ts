@@ -14,5 +14,5 @@ export const getApiData = async <ResponseData>(
   url: string
 ): Promise<ResponseData> => {
   const response = await axios.get(url);
-  return response.data
+  return response.data;
 };

@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import { Command, getApiData } from "../utils";
 
-const command: Command ={
+const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
     console.log(args);
     const data = await getApiData<{ pickup: string }>(
