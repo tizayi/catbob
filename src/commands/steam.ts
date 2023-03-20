@@ -5,8 +5,6 @@ import fs from "fs";
 import { Command, getApiData } from "../utils";
 import Insult, { InsultData } from "./insult";
 
-const USER_FILE_PATH = "./src/commands/steam-users/users.json";
-
 dotenv.config();
 
 interface steamGame {
@@ -17,35 +15,6 @@ interface steamGame {
   playtime_linux_forever: number;
   rtime_last_played: number;
 }
-
-interface SteamUser {
-  name: string;
-  user_id: string;
-}
-
-const userArrayWrite = (users: SteamUser[] = []): void => {
-  fs.writeFileSync(USER_FILE_PATH, JSON.stringify(users));
-};
-
-const readUserArray = (): SteamUser[] => {
-  const jsonString = fs.readFileSync(USER_FILE_PATH).toString();
-  return JSON.parse(jsonString);
-};
-
-const showUsers = (): string => {
-  const currentUsers = readUserArray();
-  return JSON.stringify(currentUsers);
-};
-
-const addUser = (newUser: SteamUser) => {
-  const currentUsers = readUserArray();
-  if (currentUsers.includes(newUser)) {
-    return;
-  } else {
-    const newArray = [...currentUsers, newUser];
-    userArrayWrite(newArray);
-  }
-};
 
 
 const isValidSteamId = (steamId: string): boolean => {
