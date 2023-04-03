@@ -10,9 +10,9 @@ export interface CommandObject {
   [key: string]: Command;
 }
 
-export const getApiData = async <ResponseData>(
-  url: string
-): Promise<ResponseData> => {
-  const response = await axios.get(url);
-  return response.data;
+export const hashCode = (input: string): number => {
+  return input.split("").reduce((a: number, b: string): number => {
+    a = (a << 5) - a + b.charCodeAt(0);
+    return a & a;
+  }, 0);
 };

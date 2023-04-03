@@ -1,47 +1,17 @@
-import { Message, ThreadAutoArchiveDuration } from "discord.js";
+import { Message } from "discord.js";
 import axios from "axios";
 import * as dotenv from "dotenv";
-import fs from "fs";
-import { Command, getApiData } from "../utils";
-import Insult, { InsultData } from "./insult";
+import { Command } from "../utils";
 
 dotenv.config();
 
-interface steamGame {
-  appid: number;
-  playtime_forever: number;
-  playtime_windows_forever: number;
-  playtime_mac_forever: number;
-  playtime_linux_forever: number;
-  rtime_last_played: number;
-}
-
-const isValidSteamId = (steamId: string): boolean => {
-  if (steamId.length !== 17 || parseInt(steamId)) {
-    return false;
-  }
-  return true;
-};
-
 const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
-    for (let string in args) {
-      if (!isValidSteamId(string)) {
-        Insult.callback(message);
-        message.reply("Not a valid Id");
-        const data = await getApiData<InsultData>(
-          "https://evilinsult.com/generate_insult.php?lang=en&type=json"
-        );
-        message.channel.send(data.insult);
-        continue;
-      }
-    }
-
     const gamesArray: number[][] = await Promise.all(args.map(getOwnedGames));
     const result: number[] = gamesArray.reduce((a, b) =>
       a.filter((c) => b.includes(c))
     );
-    const gameNames: string[] = await Promise.all(result.map(getGamename));
+    const gameNames = await Promise.all(result.map(getGameName));
     message.reply(gameNames.join("\n"));
   },
   description: "Catbob can do steam things (WIP)",
@@ -50,25 +20,25 @@ const command: Command = {
 export default command;
 
 const getOwnedGames = async (userId: string): Promise<number[]> => {
-  const response = await axios.get(
+  const UserResponse = await axios.get(
     `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_KEY}&steamid=${userId}&format=json`
   );
-  const gamesList: number[] = response.data.response.games.map(
-    (game: steamGame) => game.appid
+  const gamesList: number[] = UserResponse.data.response.games.map(
+    (game: any) => game.appid
   );
   return gamesList;
 };
 
-const getGamename = async (gameId: number): Promise<string> => {
-  const response = await axios.get(
-    `http://store.steampowered.com/api/appdetails?appids=${gameId}`
-  );
-  let result = "Bad game";
-  try {
-    result = response.data[gameId.toString()].data.name;
-  } catch (error) {
-    console.log(gameId);
-    console.log(response.data[gameId.toString()].data);
+const getGameName = async (gameId: number): Promise<string> => {
+  const response = await axios
+    .get(
+      `http://store.steampowered.com/api/appdetails?appids=${gameId.toString()}`
+    )
+    .catch((err) => console.log(`[${gameId}]:${err}`));
+  setTimeout(() => console.log("Small wait in API calls"), 100);
+  if (response) {
+    return response.data[gameId.toString()].data.name;
+  } else {
+    return "";
   }
-  return result;
 };

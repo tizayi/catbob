@@ -1,24 +1,18 @@
 import { Message } from "discord.js";
-import { Command, getApiData } from "../utils";
-
-export interface InsultData {
-  number: number;
-  language: string;
-  insult: string;
-  created: string;
-  shown: number;
-  createdby: string;
-  active: string;
-  comment: string;
-}
+import { Command } from "../utils";
+import axios from "axios";
 
 const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
     console.log(args);
-    const data = await getApiData<InsultData>(
-      "https://evilinsult.com/generate_insult.php?lang=en&type=json"
-    );
-    message.reply(`Hi ${args.join(",")} , ${data.insult}`);
+    axios
+      .get("https://evilinsult.com/generate_insult.php?lang=en&type=json")
+      .then((response) => {
+        message.reply(`Hi ${args.join(" ")} , ${response.data.insult}`);
+      })
+      .catch((err) => {
+        console.log(`${err}`);
+      });
   },
   description: "Catbob is in his jocker arc",
 };

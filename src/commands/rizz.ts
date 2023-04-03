@@ -1,13 +1,18 @@
+import axios from "axios";
 import { Message } from "discord.js";
-import { Command, getApiData } from "../utils";
+import { Command } from "../utils";
 
 const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
     console.log(args);
-    const data = await getApiData<{ pickup: string }>(
-      "https://vinuxd.vercel.app/api/pickup"
-    );
-    message.reply(`Hi ${args.join(",")} , ${data.pickup}`);
+    axios
+      .get("https://vinuxd.vercel.app/api/pickup")
+      .then((response) => {
+        message.reply(`Hi ${args.join(" ")} , ${response.data.pickup}`);
+      })
+      .catch((err) => {
+        console.log(`${err}`);
+      });
   },
   description: "Catbob has w rizz.",
 };

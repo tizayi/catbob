@@ -12,7 +12,7 @@ describe("Test simple command reply handlers", () => {
     } as unknown as Message;
 
     Based.callback(message, "test");
-    expect(message.reply).toHaveBeenCalledWith("Not based");
+    expect(message.reply).toHaveBeenCalledWith("Cringe");
   });
 
   test("Test ping command handler", async () => {

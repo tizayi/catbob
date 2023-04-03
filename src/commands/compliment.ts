@@ -1,13 +1,18 @@
+import axios from "axios";
 import { Message } from "discord.js";
-import { Command, getApiData } from "../utils";
+import { Command } from "../utils";
 
 const command: Command = {
   callback: async (message: Message, ...args: string[]): Promise<void> => {
     console.log(args);
-    const data = await getApiData<{ compliment: string }>(
-      "https://complimentr.com/api"
-    );
-    message.reply(`Hi ${args.join(",")} , ${data.compliment}`);
+    axios
+      .get("https://complimentr.com/api")
+      .then((response) => {
+        message.reply(`Hi ${args.join(" ")} , ${response.data.compliment}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   description: "Catbob can compliment people ",
 };
