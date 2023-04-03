@@ -38,7 +38,7 @@ const upTofirstConsonant = (word: string): string => {
   return word;
 };
 
-const upToLastConsonant = (word: string) => {
+const upToLastConsonant = (word: string): string => {
   for (let index = word.length - 1; index >= 0; index--) {
     if (!isVowel(word[index])) {
       return word.slice(0, index + 1);
@@ -47,7 +47,7 @@ const upToLastConsonant = (word: string) => {
   return word;
 };
 
-const isVowel = (letter: string) => {
+const isVowel = (letter: string): boolean => {
   console.log(letter);
   const vowels = ["A", "a", "E", "e", "I", "i", "O", "o", "U", "u"];
   if (vowels.includes(letter)) {
