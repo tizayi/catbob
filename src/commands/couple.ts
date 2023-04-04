@@ -1,9 +1,10 @@
 import { Message } from "discord.js";
-import { Command } from "../utils";
+import { Command, hashCode } from "../utils";
 
 const command: Command = {
   callback: (message: Message, ...args: string[]): void => {
-    message.reply(getPortmanteau(args));
+    const compatScore = Math.abs(hashCode(args.join(""))%100)
+    message.reply(`${compatScore}%: ${getPortmanteau(args)}`);
   },
   description: "Catbob is equiped with the latest in match making technology",
 };
@@ -48,10 +49,8 @@ const upToLastConsonant = (word: string): string => {
 };
 
 const isVowel = (letter: string): boolean => {
-  console.log(letter);
   const vowels = ["A", "a", "E", "e", "I", "i", "O", "o", "U", "u"];
   if (vowels.includes(letter)) {
-    console.log("true");
     return true;
   } else {
     return false;
