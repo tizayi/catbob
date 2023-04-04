@@ -3,7 +3,7 @@ import { Command, hashCode } from "../utils";
 
 const command: Command = {
   callback: (message: Message, ...args: string[]): void => {
-    const compatScore = Math.abs(hashCode(args.join(""))%100)
+    const compatScore = Math.abs(hashCode(args.join("")) % 100);
     message.reply(`${compatScore}%: ${getPortmanteau(args)}`);
   },
   description: "Catbob is equiped with the latest in match making technology",
