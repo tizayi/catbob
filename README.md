@@ -1,6 +1,6 @@
 # catbob
-[![catbob Code CI](https://github.com/tizayi/catbob/actions/workflows/code.yml/badge.svg)](https://github.com/tizayi/catbob/actions/workflows/code.yml)
 
+[![catbob Code CI](https://github.com/tizayi/catbob/actions/workflows/code.yml/badge.svg)](https://github.com/tizayi/catbob/actions/workflows/code.yml)
 
 A discord bot to do discord things.
 

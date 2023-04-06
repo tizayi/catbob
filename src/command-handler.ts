@@ -28,8 +28,8 @@ export default (client: Client) => {
     } catch (error) {
       console.log(error);
     }
-  })
-}
+  });
+};
 
 export const getCommandNames = (
   commandFiles: string[],
