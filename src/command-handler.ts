@@ -24,7 +24,7 @@ export default (client: Client) => {
 
     try {
       commands[commandName].callback(message, args);
-      console.log(`[Command: ${commandName},args:${args}]`);
+      console.log(`[Command: ${commandName}, args: ${args}]`);
     } catch (error) {
       console.log(error);
     }
