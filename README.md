@@ -1,5 +1,7 @@
 # catbob
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![code_ci](https://github.com/github/docs/actions/workflows/code.yml/badge.svg)
+
+---
 A discord bot to do discord things.
 
 ## Start up
