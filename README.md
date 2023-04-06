@@ -1,5 +1,5 @@
 # catbob
-![code_ci](https://github.com/github/docs/actions/workflows/code.yml/badge.svg)
+![code_ci](./github/workflows/code.yml/badge.svg)
 
 ---
 A discord bot to do discord things.
