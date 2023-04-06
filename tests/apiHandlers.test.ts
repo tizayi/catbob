@@ -4,6 +4,7 @@ import axios from "axios";
 import Insult from "../src/commands/insult";
 import Rizz from "../src/commands/rizz";
 import Compliment from "../src/commands/compliment";
+import Animals from "../src/commands/animal";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -59,5 +60,23 @@ describe("Test api handler", () => {
 
     Compliment.callback(message, ["test"]);
     expect(mockedAxios.get).toHaveBeenCalledWith("https://complimentr.com/api");
+  });
+
+  test("Test animal api call", async () => {
+    const message: Message = {
+      channel: { send: jest.fn() },
+      reply: jest.fn(),
+    } as unknown as Message;
+
+    const animalData = {
+      data: { url: "Did it test when you fell from test" },
+    };
+
+    mockedAxios.get.mockResolvedValue(animalData);
+
+    Animals.callback(message, ["cat"]);
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      "https://api.thecatapi.com/v1/images/search"
+    );
   });
 });

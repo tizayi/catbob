@@ -10,7 +10,7 @@ const command: Command = {
     const wrapper = "```\n";
     const infoStringArray = Object.entries(commandObject).map((value) => {
       const [name, command] = value;
-      return `${name}: ${command.description}: ( !${name} ) \n\n`;
+      return `${name}: ( !${name} ) \n - ${command.description} \n\n`;
     });
     const intro =
       "Hi Iam catbob :smiley: and this is what I can do :point_down: \n ";

@@ -21,7 +21,7 @@ const apiLibrary: { [key: string]: AnimalApi } = {
     data_access: "image",
   },
   panda: { api: "https://some-random-api.ml/img/panda", data_access: "link" },
-  koala: { api: "https://some-random-api.ml/img/koala", data_access: "image" },
+  koala: { api: "https://some-random-api.ml/img/koala", data_access: "link" },
   kangaroo: {
     api: "https://some-random-api.ml/animal/kangaroo",
     data_access: "image",
@@ -42,7 +42,9 @@ const command: Command = {
       );
     }
   },
-  description: "Catbob can fetch random images of animals.",
+  description: `Catbob can fetch random images of animals. {${Object.keys(
+    apiLibrary
+  ).join(", ")}}`,
 };
 
 const getAnimal = (message: Message, animalApi: AnimalApi) => {
