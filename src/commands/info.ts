@@ -4,7 +4,7 @@ import { getCommandNames } from "../command-handler";
 import { Command } from "../utils";
 
 const command: Command = {
-  callback: (message: Message, ...args: string[]): void => {
+  callback: (message: Message, args: string[]): void => {
     const commandFiles = getFiles(`${__dirname}`, ".ts");
     const commandObject = getCommandNames(commandFiles, ".ts");
     const wrapper = "```\n";

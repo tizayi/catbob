@@ -11,7 +11,7 @@ describe("Test simple command reply handlers", () => {
       reply: jest.fn(),
     } as unknown as Message;
 
-    Based.callback(message, "test");
+    Based.callback(message, ["test"]);
     expect(message.reply).toHaveBeenCalledWith("Cringe");
   });
 
@@ -20,7 +20,7 @@ describe("Test simple command reply handlers", () => {
       channel: { send: jest.fn() },
       reply: jest.fn(),
     } as unknown as Message;
-    Ping.callback(message);
+    Ping.callback(message, []);
 
     expect(message.reply).toHaveBeenCalledWith("pong");
   });
@@ -30,7 +30,7 @@ describe("Test simple command reply handlers", () => {
       channel: { send: jest.fn() },
       reply: jest.fn(),
     } as unknown as Message;
-    Hello.callback(message);
+    Hello.callback(message, []);
 
     expect(message.reply).toHaveBeenCalledWith("Welcome to robot hell.");
   });

@@ -6,7 +6,7 @@ import { Command } from "../utils";
 dotenv.config();
 
 const command: Command = {
-  callback: async (message: Message, ...args: string[]): Promise<void> => {
+  callback: async (message: Message, args: string[]): Promise<void> => {
     const gamesArray: number[][] = await Promise.all(args.map(getOwnedGames));
     const result: number[] = gamesArray.reduce((a, b) =>
       a.filter((c) => b.includes(c))

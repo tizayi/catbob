@@ -4,9 +4,9 @@ A discord bot to do discord things.
 
 ## Start up
 
-Create `.env` file with api keys.
+Create `.env` file .
 
-Start up server
+Start up
 
 ```bash
   cd catbob

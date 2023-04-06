@@ -2,7 +2,7 @@ import axios from "axios";
 import { Message } from "discord.js";
 
 export interface Command {
-  callback(message: Message, ...args: string[]): void;
+  callback(message: Message, args: string[]): void;
   description: string;
 }
 

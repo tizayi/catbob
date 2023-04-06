@@ -3,8 +3,7 @@ import { Command } from "../utils";
 import axios from "axios";
 
 const command: Command = {
-  callback: async (message: Message, ...args: string[]): Promise<void> => {
-    console.log(args);
+  callback: async (message: Message, args: string[]): Promise<void> => {
     axios
       .get("https://evilinsult.com/generate_insult.php?lang=en&type=json")
       .then((response) => {
