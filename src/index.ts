@@ -11,7 +11,7 @@ const client: Client = new Client({
     GatewayIntentBits.DirectMessages,
     GatewayIntentBits.DirectMessageTyping,
   ],
-  partials: [Partials.Channel,]
+  partials: [Partials.Channel],
 });
 
 client.on("ready", () => {
