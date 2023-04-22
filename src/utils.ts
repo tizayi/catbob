@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Message } from "discord.js";
 
 export interface Command {
