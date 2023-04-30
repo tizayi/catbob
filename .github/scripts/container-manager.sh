@@ -1,8 +1,8 @@
 #!/bin/bash
 function start() {
   git pull origin main
-  sudo docker build -rm -t myapp_image .
-  sudo docker run -d -name myapp_container myapp_image
+  sudo docker build -t myapp_image .
+  sudo docker run -d --name myapp_container myapp_image
 }
 
 function stop() {
