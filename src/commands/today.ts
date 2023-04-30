@@ -1,11 +1,9 @@
 import axios from "axios";
 import { Message } from "discord.js";
 import { Command } from "../utils";
-import { isNativeError } from "util/types";
 
 type Card = {
   cardName: string;
-  cardDesc: string;
   meaningUp: string;
 };
 
@@ -18,12 +16,11 @@ const command: Command = {
         const cards: Card[] = cardData.map((card: any) => {
           return {
             cardName: card.name,
-            cardDesc: card.desc,
             meaningUp: card.meaning_up,
           };
         });
         const cardStrings = cards.map((card: Card) => {
-          return `card: ${card.cardName}\n description: ${card.cardDesc}\n meaning: ${card.meaningUp} \n\n`;
+          return `card: ${card.cardName}\n meaning: ${card.meaningUp} \n\n`;
         });
         const cardType = ["thoughts", "feelings", "what you will be doing"];
         for (let i = 0; i < 3; i++) {
