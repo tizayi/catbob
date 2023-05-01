@@ -23,4 +23,5 @@ jobs:
           TARGET: "/home/ubuntu/catbob"
           EXCLUDE: "/node_modules/"
           SCRIPT_AFTER: |
-            bash ./.github/scripts/container-manager.sh restart
+            cd "/home/ubuntu/catbob"
+            bash .github/scripts/container-manager.sh restart
