@@ -13,15 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
+      - name: Build & Deploy
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SOURCE: "."
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu/catbob"
-          EXCLUDE: "/node_modules/"
-          SCRIPT_AFTER: |
-            cd "/home/ubuntu/catbob"
-            bash .github/scripts/container-manager.sh restart
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOSTNAME: ${{ secrets.REMOTE_HOST }}
+          USER_NAME: ${secrets.USER_NAME}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} ' \
+          "cd /home/${USER_NAME}/catbob; bash .github/scripts/container-manager.sh restart"
