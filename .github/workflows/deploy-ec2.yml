@@ -13,12 +13,29 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Build & Deploy
-        env:
-          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          HOSTNAME: ${{ secrets.REMOTE_HOST }}
-          USER_NAME: ${secrets.USER_NAME}
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Configure SSH
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} ' \
-          "cd /home/${USER_NAME}/catbob; bash .github/scripts/container-manager.sh restart"
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/github-actions-key
+          chmod 600 ~/.ssh/github-actions-key
+          cat >>~/.ssh/config <<END
+          Host ec2
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/github-actions-key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_HOST: ${{ secrets.REMOTE_HOST }}
+          SSH_USER: ${secrets.USER_NAME}
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+
+
+      - name: Build & Deploy
+        run: |
+          ssh ec2 "cd /home/${{ secrets.USER_NAME }}/catbob;bash .github/scripts/container-manager.sh restart"
