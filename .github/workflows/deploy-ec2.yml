@@ -18,24 +18,14 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/github-actions-key
-          chmod 600 ~/.ssh/github-actions-key
-          cat >>~/.ssh/config <<END
-          Host ec2
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/github-actions-key
-            StrictHostKeyChecking no
-          END
-        env:
-          SSH_HOST: ${{ secrets.REMOTE_HOST }}
-          SSH_USER: ${{ secrets.USER_NAME }}
-          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            cd /home/${{ secrets.USER_NAME }}/catbob
+            bash .github/scripts/container-manager.sh restart
 
-
-      - name: Build & Deploy
-        run: |
-          sudo ssh ec2 "cd /home/${{ secrets.USER_NAME }}/catbob;bash .github/scripts/container-manager.sh restart"
