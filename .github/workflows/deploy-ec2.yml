@@ -32,7 +32,7 @@ jobs:
           END
         env:
           SSH_HOST: ${{ secrets.REMOTE_HOST }}
-          SSH_USER: ${secrets.USER_NAME}
+          SSH_USER: ${{ secrets.USER_NAME }}
           SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
 
 
