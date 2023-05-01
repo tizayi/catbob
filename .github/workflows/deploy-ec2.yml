@@ -38,4 +38,4 @@ jobs:
 
       - name: Build & Deploy
         run: |
-          ssh ec2 "cd /home/${{ secrets.USER_NAME }}/catbob;bash .github/scripts/container-manager.sh restart"
+          sudo ssh ec2 "cd /home/${{ secrets.USER_NAME }}/catbob;bash .github/scripts/container-manager.sh restart"
