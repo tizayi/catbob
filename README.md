@@ -32,13 +32,16 @@ Run tests with jest
   cd catbob
   npm test
 ```
+
 ## Adding new commands
+
 You can add new commands by creating a .ts file in the commands directory.
 
 You need to create a command object which contains a description of the command and a callback function.
 The command object must be the default export if the file.
 
 The command interface is :
+
 ```typescript
 interface Command {
   callback(message: Message, args: string[]): void;
