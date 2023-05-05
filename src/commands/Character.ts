@@ -1,25 +1,54 @@
-// import axios from "axios";
-// import { Message } from "discord.js";
-// import { Command } from "../utils";
+import axios from "axios";
+import { Message } from "discord.js";
+import { Command } from "../utils";
 
-// const command: Command = {
-//   callback: async (message: Message, args: string[]): Promise<void> => {
-//     axios
-//     const classSelection = ["Barbarin", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rouge", "Sorcerer", "Warlock", "Wizard" ];
-//     const class = Math.floor(Math.random() * classSelection.length);
-//     const raceSelection = ["Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling"];
-//     const Race = Math.floor(Math.random() * raceSelection.length);
-//     const strength = [(Random()*20)+1];
-//     const dexterity = [(Random()*20)+1];
-//     const constitution = [(Random()*20)+1];
-//     const intelligence = [(Random()*20)+1];
-//     const wisdom = [(Random()*20)+1];
-//     const charisma = [(Random()*20)+1];
-//     message.reply(race class /n "Strength:" strength " Dexterity:" dexterity " Constitution:" constitution " Intelligence:" intelligence " Wisdom:" wisdom " Charisma:" charisma);
+// first off always lowercase unless you are defining a type, interface or class
 
-// };
-//   },
-//   description: "Make a d and d character.",
-// };
+// Interfaces and types are a typescipt thing they help spot bugs by enforcing strict typing
+interface Character {
+    class: string;
+    race: string;
+    strength: number;
+    dexterity: number;
+    constitution: number;
+    intelligence: number;
+    wisdom: number;
+    charisma: number;
+}
 
-// export default command;
+// you were right here
+const classSelection = ["Barbarin", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rouge", "Sorcerer", "Warlock", "Wizard" ];
+const raceSelection = ["Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling"];
+
+
+const command: Command = {
+  callback: (message: Message, args: string[]): void => {
+    const character = createCharacter();
+    message.reply(printCharacter(character));
+    },
+  description: "Make a d and d character with random stats",
+};
+
+export default command;
+
+// js has no integer type everthing is a floating point number so Math.floor is needed for integers
+const createCharacter = (): Character => {
+    return{
+        class: classSelection[Math.floor(Math.random() * classSelection.length)],
+        race: raceSelection[Math.floor(Math.random() * raceSelection.length)],
+        strength: Math.floor(Math.random() *20) + 1,
+        dexterity: Math.floor(Math.random() *20) + 1,
+        constitution: Math.floor(Math.random() * 20) + 1,
+        intelligence: Math.floor(Math.random() * 20) + 1,
+        wisdom: Math.floor(Math.random() *20) + 1,
+        charisma: Math.floor(Math.random() *20) + 1,
+    }
+}
+
+const printCharacter = (character: Character):string => {
+    let characterList: string[] = []
+    for (const [key, value] of Object.entries(character)) {
+        characterList.push(`${key} : ${value}\n`)
+    }
+    return characterList.join("");
+}
