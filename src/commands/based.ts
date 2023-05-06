@@ -5,7 +5,7 @@ const command: Command = {
   callback: (message: Message, args: string[]) => {
     const basedValue = hashCode(args.join(""));
     if (basedValue > 0) {
-      message.reply("cringe");
+      message.reply("Cringe");
     } else {
       message.reply("based");
     }
