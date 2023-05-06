@@ -11,7 +11,8 @@ jobs:
   use-test:
     uses: tizayi/catbob/.github/workflows/code.yml@main
   deploy:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to EC2 on main branch push
+    needs: use-test
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
