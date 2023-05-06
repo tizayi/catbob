@@ -3,7 +3,7 @@ import { Command } from "../utils";
 import axios from "axios";
 
 const command: Command = {
-  callback: (message: Message, args: string[]): void => {
+  callback: (message: Message, args: string[]) => {
     getQuestions(message, args);
   },
   description: "Catbob enters gameshow mode ([0]_[0])",
@@ -27,7 +27,7 @@ const addPlayer = (message: Message): Player => {
   return { name: message.author.username, userid: message.author.id, score: 0 };
 };
 
-const getQuestions = (message: Message, args: string[]) => {
+const getQuestions = (message: Message, args: string[]): void => {
   const categories = args[1];
   const difficulty = args[0];
   axios
