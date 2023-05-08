@@ -6,7 +6,10 @@ const command: Command = {
   callback: (message: Message, args: string[]) => {
     getQuestions(message, args);
   },
-  description: "Catbob enters gameshow mode ([0]_[0])",
+  description:
+    "Catbob gives trivia questions in these categories music sport_and_leisure,\
+    film_and_tv, arts_and_literature, history, society_and_culture ,science, geography,\
+     food_and_drink, general_knowledge",
 };
 
 export default command;
@@ -14,20 +17,10 @@ export default command;
 interface Question {
   question: string;
   correctAnswer: string;
-  incorrectAnswers: string[];
+  options: string[];
 }
 
-interface Player {
-  name: string;
-  userid: string;
-  score: number;
-}
-
-const addPlayer = (message: Message): Player => {
-  return { name: message.author.username, userid: message.author.id, score: 0 };
-};
-
-const getQuestions = (message: Message, args: string[]): void => {
+const getQuestions = (message: Message, args: string[]) => {
   const categories = args[1];
   const difficulty = args[0];
   axios
@@ -40,13 +33,22 @@ const getQuestions = (message: Message, args: string[]): void => {
           return {
             question: apiQuestion.question,
             correctAnswer: apiQuestion.correctAnswer,
-            incorrectAnswers: apiQuestion.incorrectAnswers,
+            options: [
+              ...apiQuestion.incorrectAnswers,
+              apiQuestion.correctAnswer,
+            ],
           };
         }
       );
-      message.reply(questionArray[0].question);
+      showQuestion(message, questionArray[0]);
     })
     .catch((err) => {
       console.log(err);
     });
+};
+
+const showQuestion = (message: Message, question: Question): void => {
+  const answers = question.options.sort((a, b) => 0.5 - Math.random());
+  const answersString = answers.join("\n");
+  message.reply(`${question.question}\n${answersString}`);
 };
