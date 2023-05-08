@@ -40,7 +40,7 @@ const getQuestions = (message: Message, args: string[]) => {
           };
         }
       );
-      message.reply(`${questionArray[0].question}`);
+      showQuestion(message,questionArray[0])
     })
     .catch((err) => {
       console.log(err);
