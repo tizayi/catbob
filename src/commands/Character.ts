@@ -58,12 +58,12 @@ const createCharacter = (): Character => {
   return {
     class: classSelection[Math.floor(Math.random() * classSelection.length)],
     race: raceSelection[Math.floor(Math.random() * raceSelection.length)],
-    strength: Math.floor(Math.random() * 20) + 1,
-    dexterity: Math.floor(Math.random() * 20) + 1,
-    constitution: Math.floor(Math.random() * 20) + 1,
-    intelligence: Math.floor(Math.random() * 20) + 1,
-    wisdom: Math.floor(Math.random() * 20) + 1,
-    charisma: Math.floor(Math.random() * 20) + 1,
+    strength: Math.floor(Math.random() * (18-3+1)) + 3,
+    dexterity: Math.floor(Math.random() * (18-3+1)) + 3,
+    constitution: Math.floor(Math.random() * (18-3+1)) + 3,
+    intelligence: Math.floor(Math.random() * (18-3+1)) + 3,
+    wisdom: Math.floor(Math.random() * (18-3+1)) + 3,
+    charisma: Math.floor(Math.random() * (18-3+1)) + 3,
   };
 };
 
