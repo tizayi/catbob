@@ -6,7 +6,10 @@ const command: Command = {
   callback: (message: Message, args: string[]): void => {
     getQuestions(message, args);
   },
-  description: "Catbob enters gameshow mode ([0]_[0])",
+  description:
+    "Catbob gives trivia questions in these categories music sport_and_leisure,\
+    film_and_tv, arts_and_literature, history, society_and_culture ,science, geography,\
+     food_and_drink, general_knowledge",
 };
 
 export default command;
@@ -16,16 +19,6 @@ interface Question {
   correctAnswer: string;
   options: string[];
 }
-
-interface Player {
-  name: string;
-  userid: string;
-  score: number;
-}
-
-const addPlayer = (message: Message): Player => {
-  return { name: message.author.username, userid: message.author.id, score: 0 };
-};
 
 const getQuestions = (message: Message, args: string[]) => {
   const categories = args[1];
