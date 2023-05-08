@@ -45,7 +45,8 @@ const raceSelection = [
 const command: Command = {
   callback: (message: Message, args: string[]): void => {
     const character = createCharacter();
-    message.reply(printCharacter(character));
+    let results = raceTraits(character);
+    message.reply(printCharacter(results));
   },
   description: "Make a d and d character with random stats",
 };
@@ -66,17 +67,44 @@ const createCharacter = (): Character => {
   };
 };
 
-let myCharacter = createCharacter() 
-const traits = Object.keys(myCharacter);
-if (myCharacter.race === "Dwarf") {myCharacter.constitution + 2}
-if (myCharacter.race === "Elf") {myCharacter.dexterity + 2}
-if (myCharacter.race === "Halfling") {myCharacter.dexterity + 2}
-if (myCharacter.race === "Human") {myCharacter.strength + 1 myCharacter.dexterity + 1 myCharacter.constitution + 1 myCharacter.intelligence + 1 myCharacter.wisdom + 1 myCharacter.charisma + 1}
-if (myCharacter.race === "Dragonborn") {myCharacter.strength + 2 myCharacter.charisma + 1 }
-if (myCharacter.race === "Gnome") {myCharacter.intelligence + 2}
-if (myCharacter.race === "Half-Elf") {myCharacter.charisma + 2}
-if (myCharacter.race === "Half-Orc") {myCharacter.strength + 2 myCharacter.constitution + 1}
-if (myCharacter.race === "Tiefling") {myCharacter.intelligence + 1 myCharacter.charisma + 2 }
+function raceTraits(myCharacter: Character): Character {
+  if (myCharacter.race === "Dwarf") {
+    myCharacter.constitution += 2;
+  }
+  if (myCharacter.race === "Elf") {
+    myCharacter.dexterity += 2;
+  }
+  if (myCharacter.race === "Halfling") {
+    myCharacter.dexterity += 2;
+  }
+  if (myCharacter.race === "Human") {
+    myCharacter.strength += 1;
+    myCharacter.dexterity += 1;
+    myCharacter.constitution += 1;
+    myCharacter.intelligence += 1;
+    myCharacter.wisdom += 1;
+    myCharacter.charisma += 1;
+  }
+  if (myCharacter.race === "Dragonborn") {
+    myCharacter.strength += 2;
+    myCharacter.charisma += 1;
+  }
+  if (myCharacter.race === "Gnome") {
+    myCharacter.intelligence += 2;
+  }
+  if (myCharacter.race === "Half-Elf") {
+    myCharacter.charisma += 2;
+  }
+  if (myCharacter.race === "Half-Orc") {
+    myCharacter.strength += 2;
+    myCharacter.constitution += 1;
+  }
+  if (myCharacter.race === "Tiefling") {
+    myCharacter.intelligence += 1;
+    myCharacter.charisma += 2;
+  }
+  return myCharacter;
+}
 
 const printCharacter = (character: Character): string => {
   let characterList: string[] = [];
