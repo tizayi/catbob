@@ -14,7 +14,7 @@ export default command;
 interface Question {
   question: string;
   correctAnswer: string;
-  incorrectAnswers: string[];
+  options: string[];
 }
 
 interface Player {
@@ -40,13 +40,22 @@ const getQuestions = (message: Message, args: string[]) => {
           return {
             question: apiQuestion.question,
             correctAnswer: apiQuestion.correctAnswer,
-            incorrectAnswers: apiQuestion.incorrectAnswers,
+            options: [
+              ...apiQuestion.incorrectAnswers,
+              apiQuestion.correctAnswer,
+            ],
           };
         }
       );
-      message.reply(questionArray[0].question);
+      message.reply(`${questionArray[0].question}`);
     })
     .catch((err) => {
       console.log(err);
     });
+};
+
+const showQuestion = (message: Message, question: Question): void => {
+  const answers = question.options.sort((a, b) => 0.5 - Math.random());
+  const answersString = answers.join("\n");
+  message.reply(`${question.question}\n${answersString}`);
 };

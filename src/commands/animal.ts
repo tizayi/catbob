@@ -22,10 +22,6 @@ const apiLibrary: { [key: string]: AnimalApi } = {
   },
   panda: { api: "https://some-random-api.ml/img/panda", data_access: "link" },
   koala: { api: "https://some-random-api.ml/img/koala", data_access: "link" },
-  kangaroo: {
-    api: "https://some-random-api.ml/animal/kangaroo",
-    data_access: "image",
-  },
 };
 
 const command: Command = {
