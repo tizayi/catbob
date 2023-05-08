@@ -3,7 +3,7 @@ import { Command } from "../utils";
 import axios from "axios";
 
 const command: Command = {
-  callback: (message: Message, args: string[]): void => {
+  callback: (message: Message, args: string[]) => {
     getQuestions(message, args);
   },
   description:

@@ -25,7 +25,7 @@ const apiLibrary: { [key: string]: AnimalApi } = {
 };
 
 const command: Command = {
-  callback: async (message: Message, args: string[]): Promise<void> => {
+  callback: async (message: Message, args: string[]) => {
     const type = args[0];
     const animalList = Object.keys(apiLibrary);
     if (animalList.includes(type)) {

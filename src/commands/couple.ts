@@ -2,7 +2,7 @@ import { Message } from "discord.js";
 import { Command, hashCode } from "../utils";
 
 const command: Command = {
-  callback: (message: Message, args: string[]): void => {
+  callback: (message: Message, args: string[]) => {
     const compatScore = Math.abs(hashCode(args.join("")) % 100);
     message.reply(`${compatScore}%: ${getPortmanteau(args)}`);
   },

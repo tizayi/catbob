@@ -3,7 +3,7 @@ import { Message } from "discord.js";
 import { Command } from "../utils";
 
 const command: Command = {
-  callback: async (message: Message, args: string[]): Promise<void> => {
+  callback: async (message: Message, args: string[]) => {
     axios
       .get("https://complimentr.com/api")
       .then((response) => {
