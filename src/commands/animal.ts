@@ -20,8 +20,6 @@ const apiLibrary: { [key: string]: AnimalApi } = {
     api: "https://randomfox.ca/floof/?ref=apilist.fun",
     data_access: "image",
   },
-  panda: { api: "https://some-random-api.ml/img/panda", data_access: "link" },
-  koala: { api: "https://some-random-api.ml/img/koala", data_access: "link" },
 };
 
 const command: Command = {

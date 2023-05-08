@@ -45,8 +45,7 @@ const raceSelection = [
 const command: Command = {
   callback: (message: Message, args: string[]): void => {
     const character = createCharacter();
-    let results = raceTraits(character);
-    message.reply(printCharacter(results));
+    message.reply(printCharacter(character));
   },
   description: "Make a d and d character with random stats",
 };
@@ -55,7 +54,7 @@ export default command;
 
 // js has no integer type everthing is a floating point number so Math.floor is needed for integers
 const createCharacter = (): Character => {
-  return {
+  const character: Character = {
     class: classSelection[Math.floor(Math.random() * classSelection.length)],
     race: raceSelection[Math.floor(Math.random() * raceSelection.length)],
     strength: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
@@ -65,46 +64,51 @@ const createCharacter = (): Character => {
     wisdom: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
     charisma: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
   };
+  return applyRaceTraits(character);
 };
 
-function raceTraits(myCharacter: Character): Character {
-  if (myCharacter.race === "Dwarf") {
-    myCharacter.constitution += 2;
+const applyRaceTraits = (character: Character): Character => {
+  switch (character.race) {
+    case "Dwarf":
+      character.constitution += 2;
+      break;
+    case "Elf":
+      character.dexterity += 2;
+      break;
+    case "Halfling":
+      character.dexterity += 2;
+      break;
+    case "Human":
+      character.strength += 1;
+      character.dexterity += 1;
+      character.constitution += 1;
+      character.intelligence += 1;
+      character.wisdom += 1;
+      character.charisma += 1;
+      break;
+    case "Dragonborn":
+      character.strength += 2;
+      character.charisma += 1;
+      break;
+    case "Gnome":
+      character.intelligence += 2;
+      break;
+    case "Half-Elf":
+      character.charisma += 2;
+      break;
+    case "Half-Orc":
+      character.strength += 2;
+      character.constitution += 1;
+      break;
+    case "Tiefling":
+      character.intelligence += 1;
+      character.charisma += 2;
+      break;
+    default:
+      break;
   }
-  if (myCharacter.race === "Elf") {
-    myCharacter.dexterity += 2;
-  }
-  if (myCharacter.race === "Halfling") {
-    myCharacter.dexterity += 2;
-  }
-  if (myCharacter.race === "Human") {
-    myCharacter.strength += 1;
-    myCharacter.dexterity += 1;
-    myCharacter.constitution += 1;
-    myCharacter.intelligence += 1;
-    myCharacter.wisdom += 1;
-    myCharacter.charisma += 1;
-  }
-  if (myCharacter.race === "Dragonborn") {
-    myCharacter.strength += 2;
-    myCharacter.charisma += 1;
-  }
-  if (myCharacter.race === "Gnome") {
-    myCharacter.intelligence += 2;
-  }
-  if (myCharacter.race === "Half-Elf") {
-    myCharacter.charisma += 2;
-  }
-  if (myCharacter.race === "Half-Orc") {
-    myCharacter.strength += 2;
-    myCharacter.constitution += 1;
-  }
-  if (myCharacter.race === "Tiefling") {
-    myCharacter.intelligence += 1;
-    myCharacter.charisma += 2;
-  }
-  return myCharacter;
-}
+  return character;
+};
 
 const printCharacter = (character: Character): string => {
   let characterList: string[] = [];
