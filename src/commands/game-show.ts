@@ -49,11 +49,13 @@ const getQuestions = (message: Message, args: string[]) => {
 
 const showQuestion = (message: Message, question: Question): void => {
   const answers = question.options.sort((a, b) => 0.5 - Math.random());
+  const letters = ["A", "B", "C", "D"];
   const reply = `${question.question}\n\
-  A. ${answers[0]} \n\
-  B. ${answers[1]} \n\
-  C. ${answers[2]} \n\
-  D. ${answers[3]} `;
+  ${letters[0]}. ${answers[0]} \n\
+  ${letters[1]}. ${answers[1]} \n\
+  ${letters[2]}. ${answers[2]} \n\
+  ${letters[3]}. ${answers[3]} `;
+  const index = answers.indexOf(question.correctAnswer);
   message.reply(reply);
-  message.reply(`||${question.correctAnswer}||`);
+  message.reply(`||${letters[index]}||`);
 };
