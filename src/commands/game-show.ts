@@ -55,5 +55,5 @@ const showQuestion = (message: Message, question: Question): void => {
   C. ${answers[2]} \n\
   D. ${answers[3]} `;
   message.reply(reply);
-  message.reply(`||${question.correctAnswer}||`)
+  message.reply(`||${question.correctAnswer}||`);
 };
