@@ -7,6 +7,8 @@ import { Command } from "../utils";
 interface Character {
   class: string;
   race: string;
+  background: string;
+  region: string;
   strength: number;
   dexterity: number;
   constitution: number;
@@ -41,7 +43,28 @@ const raceSelection = [
   "Half-Orc",
   "Tiefling",
 ];
-
+const backgroundSelection = [
+  "Acolyte",
+  "Charlatan",
+  "Criminal",
+  "Entertainer",
+  "Folk Hero",
+  "Guild Artisan",
+  "Hermit",
+  "Nobel",
+  "Outlander",
+  "Sage",
+  "Sailor",
+  "Solider",
+  "Urchin",
+];
+const regionSelection = [
+  "North Danraz",
+  "South Danraz",
+  "Rishtar",
+  "Dimriz",
+  "Sanrin",
+];
 const command: Command = {
   callback: (message: Message, args: string[]): void => {
     const character = createCharacter();
@@ -57,6 +80,8 @@ const createCharacter = (): Character => {
   const character: Character = {
     class: classSelection[Math.floor(Math.random() * classSelection.length)],
     race: raceSelection[Math.floor(Math.random() * raceSelection.length)],
+    background: backgroundSelection[Math.floor(Math.random() * backgroundSelection.length)],
+    region: regionSelection[Math.floor(Math.random() * regionSelection.length)],
     strength: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
     dexterity: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
     constitution: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
