@@ -39,11 +39,11 @@ const raceSelection = [
   "Wood Elf",
   "Dark Elf",
   "Lightfoot Halfling",
-  "Stout Halfling"
+  "Stout Halfling",
   "Human",
   "Dragonborn",
   "Forest Gnome",
-  "Rock Gnome"
+  "Rock Gnome",
   "Half-Elf",
   "Half-Orc",
   "Tiefling",
@@ -112,11 +112,11 @@ const applyRaceTraits = (character: Character): Character => {
       break;
     case "High Elf":
       character.dexterity += 2;
-      character.intelligence +=1;
+      character.intelligence += 1;
       break;
     case "Wood Elf":
       character.dexterity += 2;
-      character.wisdom +=1;
+      character.wisdom += 1;
       break;
     case "Dark Elf":
       character.dexterity += 2;
@@ -144,12 +144,12 @@ const applyRaceTraits = (character: Character): Character => {
       break;
     case "Forest Gnome":
       character.intelligence += 2;
-      character. dexterity += 1;
+      character.dexterity += 1;
       break;
     case "Rock Gnome":
-        character.intelligence += 2;
-        character. constitution += 1;
-        break;
+      character.intelligence += 2;
+      character.constitution += 1;
+      break;
     case "Half-Elf":
       character.charisma += 2;
       break;
