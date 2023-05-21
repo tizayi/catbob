@@ -33,12 +33,17 @@ const classSelection = [
   "Wizard",
 ];
 const raceSelection = [
-  "Dwarf",
-  "Elf",
-  "Halfling",
+  "Hill Dwarf",
+  "Mountain Dwarf",
+  "High Elf",
+  "Wood Elf",
+  "Dark Elf",
+  "Lightfoot Halfling",
+  "Stout Halfling"
   "Human",
   "Dragonborn",
-  "Gnome",
+  "Forest Gnome",
+  "Rock Gnome"
   "Half-Elf",
   "Half-Orc",
   "Tiefling",
@@ -97,14 +102,33 @@ const createCharacter = (): Character => {
 
 const applyRaceTraits = (character: Character): Character => {
   switch (character.race) {
-    case "Dwarf":
+    case "Hill Dwarf":
       character.constitution += 2;
+      character.wisdom += 1;
       break;
-    case "Elf":
-      character.dexterity += 2;
+    case "Mountain Dwarf":
+      character.constitution += 2;
+      character.strength += 2;
       break;
-    case "Halfling":
+    case "High Elf":
       character.dexterity += 2;
+      character.intelligence +=1;
+      break;
+    case "Wood Elf":
+      character.dexterity += 2;
+      character.wisdom +=1;
+      break;
+    case "Dark Elf":
+      character.dexterity += 2;
+      character.charisma += 1;
+      break;
+    case "Lightfoot Halfling":
+      character.dexterity += 2;
+      character.charisma += 1;
+      break;
+    case "Stout Halfling":
+      character.dexterity += 2;
+      character.constitution += 1;
       break;
     case "Human":
       character.strength += 1;
@@ -118,9 +142,14 @@ const applyRaceTraits = (character: Character): Character => {
       character.strength += 2;
       character.charisma += 1;
       break;
-    case "Gnome":
+    case "Forest Gnome":
       character.intelligence += 2;
+      character. dexterity += 1;
       break;
+    case "Rock Gnome":
+        character.intelligence += 2;
+        character. constitution += 1;
+        break;
     case "Half-Elf":
       character.charisma += 2;
       break;
