@@ -80,7 +80,10 @@ const createCharacter = (): Character => {
   const character: Character = {
     class: classSelection[Math.floor(Math.random() * classSelection.length)],
     race: raceSelection[Math.floor(Math.random() * raceSelection.length)],
-    background: backgroundSelection[Math.floor(Math.random() * backgroundSelection.length)],
+    background:
+      backgroundSelection[
+        Math.floor(Math.random() * backgroundSelection.length)
+      ],
     region: regionSelection[Math.floor(Math.random() * regionSelection.length)],
     strength: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
     dexterity: Math.floor(Math.random() * (18 - 3 + 1)) + 3,
