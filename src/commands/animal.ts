@@ -1,33 +1,15 @@
 import axios from "axios";
 import { Message } from "discord.js";
 import { Command } from "../utils";
+import { animalApiLibrary, AnimalApi } from "../utils";
 
-interface AnimalApi {
-  api: string;
-  data_access: string;
-}
-
-const apiLibrary: { [key: string]: AnimalApi } = {
-  cat: {
-    api: "https://api.thecatapi.com/v1/images/search",
-    data_access: "url",
-  },
-  dog: {
-    api: "https://dog.ceo/api/breeds/image/random",
-    data_access: "message",
-  },
-  fox: {
-    api: "https://randomfox.ca/floof/?ref=apilist.fun",
-    data_access: "image",
-  },
-};
 
 const command: Command = {
   callback: async (message: Message, args: string[]) => {
     const type = args[0];
-    const animalList = Object.keys(apiLibrary);
+    const animalList = Object.keys(animalApiLibrary);
     if (animalList.includes(type)) {
-      getAnimal(message, apiLibrary[type]);
+      getAnimal(message, animalApiLibrary[type]);
     } else {
       message.reply(
         `(${type}) is not implemented try these animals instead: ${animalList.join(
@@ -37,7 +19,7 @@ const command: Command = {
     }
   },
   description: `Catbob can fetch random images of animals. {${Object.keys(
-    apiLibrary
+    animalApiLibrary
   ).join(", ")}}`,
 };
 

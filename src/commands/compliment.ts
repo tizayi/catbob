@@ -1,11 +1,12 @@
 import axios from "axios";
 import { Message } from "discord.js";
 import { Command } from "../utils";
+import { complimentApi } from "../utils";
 
 const command: Command = {
   callback: async (message: Message, args: string[]) => {
     axios
-      .get("https://complimentr.com/api")
+      .get(complimentApi)
       .then((response) => {
         message.reply(`Hi ${args.join(" ")} , ${response.data.compliment}`);
       })

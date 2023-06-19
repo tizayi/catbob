@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Message } from "discord.js";
 import { Command } from "../utils";
+import { tarotApi } from "../utils";
 
 type Card = {
   cardName: string;
@@ -10,7 +11,7 @@ type Card = {
 const command: Command = {
   callback: async (message: Message, args: string[]): Promise<void> => {
     axios
-      .get("https://tarot-api.onrender.com/api/v1/cards/random?n=3")
+      .get(tarotApi)
       .then((response) => {
         const cardData = response.data.cards;
         const cards: Card[] = cardData.map((card: any) => {

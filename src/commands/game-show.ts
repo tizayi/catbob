@@ -1,5 +1,5 @@
 import { Message, Events } from "discord.js";
-import { Command } from "../utils";
+import { Command, gameShowApi } from "../utils";
 import axios from "axios";
 
 const command: Command = {
@@ -25,7 +25,7 @@ const getQuestions = (message: Message, args: string[]) => {
   const difficulty = args[0];
   axios
     .get(
-      `https://the-trivia-api.com/api/questions?categories=${categories}&limit=10&region=GB&difficulty=${difficulty}`
+      `${gameShowApi}?categories=${categories}&limit=10&region=GB&difficulty=${difficulty}`
     )
     .then((response) => {
       const questionArray: Question[] = response.data.map(
