@@ -3,7 +3,6 @@ import { Message } from "discord.js";
 import { Command } from "../utils";
 import { animalApiLibrary, AnimalApi } from "../utils";
 
-
 const command: Command = {
   callback: async (message: Message, args: string[]) => {
     const type = args[0];

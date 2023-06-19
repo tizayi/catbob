@@ -16,11 +16,12 @@ export const hashCode = (input: string): number => {
   }, 0);
 };
 
-export const gameShowApi = "https://the-trivia-api.com/api/questions"
-export const complimentApi = "https://complimentr.com/api"
-export const insultApi = "https://evilinsult.com/generate_insult.php?lang=en&type=json"
-export const rizzApi = "https://vinuxd.vercel.app/api/pickup"
-export const tarotApi = "https://tarot-api.onrender.com/api/v1/cards/random"
+export const gameShowApi = "https://the-trivia-api.com/api/questions";
+export const complimentApi = "https://complimentr.com/api";
+export const insultApi =
+  "https://evilinsult.com/generate_insult.php?lang=en&type=json";
+export const rizzApi = "https://vinuxd.vercel.app/api/pickup";
+export const tarotApi = "https://tarot-api.onrender.com/api/v1/cards/random";
 
 export interface AnimalApi {
   api: string;
