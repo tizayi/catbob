@@ -42,3 +42,8 @@ export const animalApiLibrary: { [key: string]: AnimalApi } = {
     data_access: "image",
   },
 };
+
+export interface Card {
+  cardName: string;
+  meaningUp: string;
+}

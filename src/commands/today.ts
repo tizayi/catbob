@@ -2,11 +2,7 @@ import axios from "axios";
 import { Message } from "discord.js";
 import { Command } from "../utils";
 import { tarotApi } from "../utils";
-
-type Card = {
-  cardName: string;
-  meaningUp: string;
-};
+import { Card } from "../utils";
 
 const command: Command = {
   callback: async (message: Message, args: string[]): Promise<void> => {
@@ -32,7 +28,7 @@ const command: Command = {
         console.log(`${err}`);
       });
   },
-  description: "Your future !!!",
+  description: "Work in progress should be a tarot reading",
 };
 
 export default command;

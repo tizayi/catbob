@@ -5,7 +5,7 @@ const command: Command = {
   callback: (message: Message, args: string[]): void => {
     if (!args[0] || !args[1]) {
       message.reply(
-        "You need the number of dice to roll and the size of the dice."
+        "You need the number of dice to roll and the size of the dice. \n !dice <size> <number>"
       );
       return;
     }
