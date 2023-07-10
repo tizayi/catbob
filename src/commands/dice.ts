@@ -3,6 +3,13 @@ import { Command } from "../utils";
 
 const command: Command = {
   callback: (message: Message, args: string[]): void => {
+    if (!args[0] || !args[1]) {
+      message.reply(
+        "You need the number of dice to roll and the size of the dice."
+      );
+      return;
+    }
+
     const number = parseInt(args[0]);
     const size = parseInt(args[1]);
     if (!number && !size) {
