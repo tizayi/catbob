@@ -22,7 +22,7 @@ const command: Command = {
     }
     message.reply(results.toString());
   },
-  description: "Catbob rolls a dice",
+  description: "Catbob rolls dice",
 };
 
 export default command;

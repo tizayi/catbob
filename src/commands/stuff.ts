@@ -6,7 +6,7 @@ const command: Command = {
     const result = message.author.avatarURL();
     result ? message.reply(result) : "things";
   },
-  description: "test data",
+  description: "use it and find out",
 };
 
 export default command;
