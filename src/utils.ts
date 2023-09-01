@@ -41,10 +41,6 @@ export const animalApiLibrary: { [key: string]: AnimalApi } = {
     api: "https://randomfox.ca/floof/?ref=apilist.fun",
     data_access: "image",
   },
-  frog: {
-    api: "https://generatorfun.com/random-frog-image",
-    data_access: "image",
-  },
 };
 
 export interface Card {
