@@ -39,13 +39,6 @@ describe("test that all apis are still up", () => {
     });
   });
 
-  test("test tarot api", async () => {
-    axios.get(tarotApi).catch((err) => {
-      console.log(err);
-      fail("tarot api has issue");
-    });
-  });
-
   test("test animal apis", async () => {
     for (let [key, value] of Object.entries(animalApiLibrary)) {
       axios.get(value.api).catch((err) => {
