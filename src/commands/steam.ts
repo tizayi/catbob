@@ -35,7 +35,7 @@ const getGameName = async (gameId: number): Promise<string> => {
       `http://store.steampowered.com/api/appdetails?appids=${gameId.toString()}`
     )
     .catch((err) => console.log(`[${gameId}]:${err}`));
-  setTimeout(() => console.log("Small wait in API calls"), 100);
+  setTimeout(() => console.log("Small wait in API calls"), 1000);
   if (response) {
     return response.data[gameId.toString()].data.name;
   } else {

@@ -1,4 +1,4 @@
-import { Message, Events } from "discord.js";
+import { Message } from "discord.js";
 import { Command, gameShowApi } from "../utils";
 import axios from "axios";
 
@@ -8,8 +8,8 @@ const command: Command = {
   },
   description:
     "Catbob gives trivia questions in these categories music sport_and_leisure,\
-    film_and_tv, arts_and_literature, history, society_and_culture ,science, geography,\
-     food_and_drink, general_knowledge",
+film_and_tv, arts_and_literature, history, society_and_culture ,science, geography,\
+food_and_drink, general_knowledge",
 };
 
 export default command;
@@ -21,8 +21,15 @@ interface Question {
 }
 
 const getQuestions = (message: Message, args: string[]) => {
+  if (!args[0] || !args[1]) {
+    message.reply(
+      "you need a category and difficulty and a category \n !game-show <difficulty> <category>"
+    );
+    return;
+  }
   const categories = args[1];
   const difficulty = args[0];
+
   axios
     .get(
       `${gameShowApi}?categories=${categories}&limit=10&region=GB&difficulty=${difficulty}`
