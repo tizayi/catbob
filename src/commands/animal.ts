@@ -32,7 +32,11 @@ const getAnimal = (message: Message, animalApi: AnimalApi) => {
       } else {
         result = response.data;
       }
+      console.log(result);
       message.reply(`${result[animalApi.data_access]}`);
+      message.reply(
+        "Would luna fuck ?????? yes: :thumbsup: no: :thumbsdown:  "
+      );
     })
     .catch((err) => {
       console.log(err);
